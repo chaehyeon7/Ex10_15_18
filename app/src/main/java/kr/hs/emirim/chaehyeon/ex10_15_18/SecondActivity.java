@@ -10,7 +10,7 @@ import android.widget.Button;
 import javax.xml.transform.Result;
 
 public class SecondActivity extends AppCompatActivity {
-    int sum;
+    int result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,21 @@ public class SecondActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int num1 = intent.getIntExtra("num1", 0);
         int num2 = intent.getIntExtra("num3", 0);
-        sum = num1 + num2;
+        char op = intent.getCharExtra("op", '0');
+        switch (op){
+            case '+':
+                result = num1 + num2;
+                break;
+            case '-':
+                result = num2 - num2;
+                break;
+            case '*':
+                result = num2 * num2;
+                break;
+            case '/':
+                result = num2 / num2;
+                break;
+        }
 
         Button btnBack = findViewById(R.id.btn_back);
         btnBack.setOnClickListener(btnListener);
@@ -31,7 +45,7 @@ public class SecondActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
-            mainIntent.putExtra("sum", sum);
+            mainIntent.putExtra("result", result);
             setResult(RESULT_OK);
             finish();
         }
